@@ -1,6 +1,8 @@
 // rws271Compass based on Compass_header_example_ver_0_2 by helscream, see below
 // Note: this file based on separate RWS Teensy3.2 work...
-// 
+// Note: With Adruino IDE 1.8.7 this is stablel with IDE 1.8.9 we sometimes see extra bits/dots
+//       in the SSD1306 display. 
+//
 /*
 MIT License
 
@@ -27,8 +29,12 @@ SOFTWARE.
 //
 // RWS note:
 // 
-//  Board: Adafruit Trinket M0 or UNO
+// recently built with Adduino IDE 1.8.9
+//
+//  Board: Adafruit Trinket M0 or UNO or Teensy 3.x (likely 4.x)
 //  Programmer: Arduino ISP
+//
+// Note: This was most heavily tested with the Trinket M0!
 //
 // for info on compass.* and its author, Google this string "Omer Ikram ul Haq compass"
 //
@@ -39,6 +45,8 @@ Location: Pakistan
 Ver: 0.1 beta --- Start
 Ver: 0.2 beta --- Debug feature included
 */
+// 2022-0722: Switched SSD1306 print() to println(), trying to avoid IDE 1.8.9 display
+//            corruption.  This did NOT help....
 //
 // 2022-07-06: Verified source code works with Adafruit M0 Trinket
 //             and protoboard OLED display using this exact code
@@ -85,9 +93,9 @@ void setup(){
   display.cp437(true);         // Use full 256 char 'Code Page 437' font
   
   display.setCursor(0, 0);     // Start at top-left corner
-  display.print("CALIBRATE:");
-  display.setCursor(0, 10);     // Next down a line   
-  display.print("Rotate 3 full times");
+  display.println("CALIBRATE:");
+  // display.setCursor(0, 10);     // Next down a line   
+  display.println("Rotate 3 full times");
   display.display();  
     
   myD271.begin(BLINK1_PIN, BLINK2_PIN);
@@ -127,7 +135,7 @@ void loop(){
   display.setTextSize(2);      // Normal 1:1 pixel scale
   display.setTextColor(WHITE); // Draw white text
   display.setCursor(0, 0);  
-  display.print(360 - myD271.getHeading());
+  display.println(360 - myD271.getHeading()); // the 360 constant can vary depending on compass orientation!!
   display.display();  
 
   delay(500);

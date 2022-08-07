@@ -35,13 +35,13 @@ float compass_x_offset=0, compass_y_offset=0, compass_z_offset=0,compass_gain_fa
 float compass_x_gainError=1,compass_y_gainError=1,compass_z_gainError=1,bearing=0;
 int blink1;
 int blink2;
-// fix for teensy 2021-12-XX by RWS
-#ifdef KINETISK
+// fix for teensy 2021-12-XX by RWS, works with UNO and Adafruit Trinket M0
+// #ifdef KINETISK
 short compass_x=0,compass_y=0,compass_z=0;
-#else
+// #else
 // int compass_x=0,compass_y=0,compass_z=0;
-short compass_x=0,compass_y=0,compass_z=0;
-#endif
+// short compass_x=0,compass_y=0,compass_z=0;
+// #endif
 // end of fix
 int compass_debug=0;
 
